@@ -37,18 +37,38 @@ def simple_calculator(operation: str, num1: float, num2: float) -> float:
     else:
         raise ValueError("Invalid operation. Please choose from 'add', 'subtract', 'multiply', or 'divide'.")
 
+def input_number(num_order):
+    if num_order == 1:
+        prompt = "Enter the first number: "
+    elif num_order == 2:
+        prompt = "Enter the second number: "
+    while True:
+        try:
+            number = float(input(prompt))
+            if num_order == 1 or number != 0:
+                return number
+            else:
+                raise ValueError
+        except ValueError:
+            print("Inputs must be numbers and must result in real values")
+
+def input_operation():
+    while True:
+            operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
+            if operation in ["add", "subtract", "multiply", "divide"]:
+                return operation
+            print("Invalid operation. Please choose from 'add', 'subtract', 'multiply', or 'divide'.")
+
+
+
 def main():
     
     print(f"===== Simple Calculator =====")
 
-    # Ask the user for sample input   
-    try: 
-        num1 = float(input("Enter the first number: "))
-        num2 = float(input("Enter the second number: "))
-        operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
-    except ValueError:
-        print("Input must be a number")
-        main()
+    # Ask the user for sample input  
+    num1 = input_number(1)
+    num2 = input_number(2)
+    operation = input_operation()
 
     # Perform the calculation and display the result
     result = simple_calculator(operation, num1, num2)
