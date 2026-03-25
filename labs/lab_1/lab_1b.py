@@ -45,20 +45,12 @@ def input_number(num_order):
     while True:
         try:
             number = float(input(prompt))
-            if num_order == 1 or number != 0:
-                return number
+            if num_order == 2 and number == 0:
+                raise ValueError("Cannot divide by zero.")
             else:
-                raise ValueError
+                return number
         except ValueError:
             print("Inputs must be numbers and must result in real values")
-
-def input_operation():
-    while True:
-            operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
-            if operation in ["add", "subtract", "multiply", "divide"]:
-                return operation
-            print("Invalid operation. Please choose from 'add', 'subtract', 'multiply', or 'divide'.")
-
 
 
 def main():
@@ -68,7 +60,7 @@ def main():
     # Ask the user for sample input  
     num1 = input_number(1)
     num2 = input_number(2)
-    operation = input_operation()
+    operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
 
     # Perform the calculation and display the result
     result = simple_calculator(operation, num1, num2)
